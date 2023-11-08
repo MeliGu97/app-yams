@@ -1,9 +1,8 @@
-
 <div class="container-fuild principal">
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="#">{{ titlePage }}</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -23,11 +22,18 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0 m-4" type="submit">Search</button>
             </form>
+            <button type="button" class="btn btn-danger">anonymous mode.</button>
         </div>
     </nav>
+
     <div class="row content">
         <div class="col-sm-4">
             <div class="card">
+                <app-pastrie-details [pastrie]="selectedPastrie"></app-pastrie-details>
+                
+            </div>
+        <!-- = Ce qu'il y avait en dur avant carte à gauche avec détail de la patisserie selectionée
+                <div class="card">
                 <img class="card-img-top" src="./assets/images/default_image.png" alt="Pastry Category">
                 <div class="card-body">
                     <h5 class="card-title">Viennoiserie</h5>
@@ -41,8 +47,10 @@
                     <li class="list-group-item">Porta ac consectetur ac</li>
                     <li class="list-group-item">Vestibulum at eros</li>
                 </ul>
-            </div>
+            </div> 
+        -->
         </div>
+
         <div class="col-sm-8 pastrie">
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
@@ -63,28 +71,40 @@
                     </li>
                 </ul>
             </nav><!-- .pagination -->
-            <button type="button" class="btn btn-lg btn-danger">You are in an anonymous mode.</button>
-            <ul *ngIf="pastries" class="list-inline">
+            
+        
+        <!-- ul li pour lister les patisseries et leurs caractéristiques
+            => n'est plus utile mais à conserver pour bien comprendre comment ça fonctionne
+
+                <ul *ngIf="pastries" class="list-inline">
                 <li class="list-inline-item" *ngFor="let pastrie of pastries">
-                    <span class="badge badge-info">{{ pastrie.id }}</span> {{ pastrie.name }}, {{ pastrie.like }}, {{ pastrie.tags }} /
+                    <span class="badge badge-info">{{ pastrie.id }}</span> {{ pastrie.name }}, {{ pastrie.like }}, {{
+                    pastrie.tags }} /
                 </li>
-            </ul>
-            <div class="card" *ngIf="pastries">
-                <div class="card-header">
-                    liste des patisseries
-                </div>
-                <div class="card-body" *ngFor="let pastrie of pastries">
-                    <h5 class="card-title">{{ pastrie.name }}</h5>
-                    <p class="card-text">{{ pastrie.description }}</p>
-                    <a class="btn btn-outline-dark" href="#" role="button">{{ pastrie.like }}</a>
-                    <a class="btn btn-outline-dark" href="#" role="button">{{ pastrie.tags }}</a>
-                    <button  class="btn btn-outline-primary" type="button" (click)="OnSelect(pastrie.name)" clickable>Selectionner</button>
-                    <img class="glyph-icon" src="../assets/svg/si-glyph-heart.svg" />
-                    <small>{{ pastrie.order }}</small>
-                    <img class="glyph-icon" src="./assets/svg/si-glyph-triangle-double-arrow-right.svg" />
-                    <small>{{ pastrie.quantity }} unités disponbiles</small>
-                </div>
-            </div><!-- card générique -->
+            </ul> 
+        -->
+
+            <!-- Carte qui fonctionne pour chaque patisserie : -->
+            <ng-container *ngIf="pastries">
+                <h2>liste des patisseries</h2>
+                <div class="card" *ngFor="let pastrie of pastries">
+                    <div class="card-header">
+                        {{ pastrie.name }}
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ pastrie.description }}</p>
+                        <a class="btn btn-outline-dark" href="#" role="button">{{ pastrie.like }}</a>
+                        <a class="btn btn-outline-dark" href="#" role="button">{{ pastrie.tags }}</a>
+                        <button class="btn btn-outline-primary" type="button" (click)="OnSelect(pastrie)"
+                            clickable>Selectionner</button>
+                        <img class="glyph-icon" src="../assets/svg/si-glyph-heart.svg" />
+                        <small>{{ pastrie.order }}</small>
+                        <img class="glyph-icon" src="./assets/svg/si-glyph-triangle-double-arrow-right.svg" />
+                        <small>{{ pastrie.quantity }} unités disponbiles</small>
+                    </div>
+                </div><!-- fin card générique -->
+            </ng-container>
+        <!-- Les cartes des patisseries en dur 
             <div class="card">
                 <div class="card-header">
                     Viennoiserie
@@ -100,7 +120,7 @@
                     <img class="glyph-icon" src="./assets/svg/si-glyph-triangle-double-arrow-right.svg" />
                     <small>8 unités disponbiles</small>
                 </div>
-            </div><!-- .card -->
+            </div>
             <div class="card">
                 <div class="card-header">
                     Pâtisserie glacée
@@ -115,7 +135,9 @@
                     <img class="glyph-icon" src="./assets/svg/si-glyph-triangle-double-arrow-right.svg" />
                     <small>4 unités disponibles</small>
                 </div>
-            </div><!-- .card -->
+            </div>
+        -->
+           
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">

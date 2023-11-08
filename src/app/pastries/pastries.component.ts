@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // Importez la définition de la classe et les pâtisseries
-import { Pastrie } from '../pastrie';
+import { Pastrie, List } from '../pastrie';
 import { PASTRIES } from '../mock-pastries';
 
 @Component({
@@ -10,16 +10,19 @@ import { PASTRIES } from '../mock-pastries';
     styleUrls: ['./pastries.component.scss']
 })
 export class PastriesComponent implements OnInit {
-    
     titlePage: string = "Page principale : liste des pâtisseries à gagner";
     pastries: Pastrie[] = PASTRIES;
+    selectedPastrie?: Pastrie;
     
     constructor() { }
     
     ngOnInit() {
     }
+    
 
-    OnSelect(nom: string) {
-      console.log(nom);
+    // Récupérer le nom de la patisserie sélectionnée au clic sur un btn
+    OnSelect(pastrie: Pastrie) {
+      console.log(pastrie);
+      this.selectedPastrie = pastrie;
     }
 }
