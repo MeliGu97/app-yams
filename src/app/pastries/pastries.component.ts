@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 // Importez la définition de la classe et les pâtisseries
 import { Pastrie, List } from '../pastrie';
-import { PASTRIES } from '../mock-pastries';
+import { PASTRIES, INGREDIENTS_LISTS } from '../mock-pastries';
+import { bindCallback } from 'rxjs';
 
 @Component({
     selector: 'app-pastries',
@@ -16,8 +17,7 @@ export class PastriesComponent implements OnInit {
     
     constructor() { }
     
-    ngOnInit() {
-    }
+    ngOnInit() { }
     
 
     // Récupérer le nom de la patisserie sélectionnée au clic sur un btn
