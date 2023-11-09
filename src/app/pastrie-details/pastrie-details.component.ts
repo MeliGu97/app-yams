@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, Output, EventEmitter} from '@angular/core';
 import { List, Pastrie } from '../pastrie';
-import { INGREDIENTS_LISTS } from '../mock-pastries';
+import { PastrieService } from '../pastrie.service';
 
 @Component({
   selector: 'app-pastrie-details',
@@ -10,17 +10,13 @@ import { INGREDIENTS_LISTS } from '../mock-pastries';
 export class PastrieDetailsComponent implements OnChanges {
   @Input() pastrie?: Pastrie;
   @Input() enableChoiceBt: boolean = true;
-  ingredientsLists?: string[];
+  ingredientsList?: string[];
   @Output() changePreference: EventEmitter<string> = new EventEmitter();
 
-  constructor() { }
+  constructor(private pastrieService: PastrieService) { }
 
   ngOnChanges() {
-    INGREDIENTS_LISTS.forEach(ingredient => {
-      if(this.pastrie?.id === ingredient.id) {
-        this.ingredientsLists = ingredient.list
-      }
-    }) 
+    if(this.pastrie?.id) this.ingredientsList = this.pastrieService.getPastrieIngredientsList(this.pastrie?.id)
   }
 
   // PastrieDetailsComponent

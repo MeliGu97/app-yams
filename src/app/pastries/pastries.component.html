@@ -96,8 +96,11 @@
                     </div>
                     <div class="card-body">
                         <p class="card-text">{{ pastrie.description }}</p>
-                        <a class="btn btn-outline-dark" href="#" role="button">{{ pastrie.like }}</a>
-                        <a class="btn btn-outline-dark" href="#" role="button">{{ pastrie.tags }}</a>
+                        <p>like :<a class="btn btn-outline-dark" href="#" role="button">{{ pastrie.like }}</a> </p>
+                        <!-- ici faire en sorte que chaque tag soit dans un bouton et qu'il soit tous à coté les uns des autres -->
+                        <div class="tags-container">
+                            <p>Tag :<a *ngFor="let tag of pastrie.tags" class="badge {{ tag | pastrieTagColor }}" href="#" role="button">{{ tag }}</a></p>
+                        </div>                          
                         <!-- Bouton pour voir le détail de la patisserie -->
                         <button class="btn btn-outline-primary" type="button" (click)="OnSelect(pastrie)"
                             clickable>Selectionner</button>

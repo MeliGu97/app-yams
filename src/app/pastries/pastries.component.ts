@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 // Importez la définition de la classe et les pâtisseries
-import { Pastrie, List } from '../pastrie';
-import { PASTRIES, INGREDIENTS_LISTS } from '../mock-pastries';
-import { bindCallback } from 'rxjs';
-
+import { Pastrie } from '../pastrie';
+import { PastrieService } from '../pastrie.service'
 @Component({
     selector: 'app-pastries',
     templateUrl: './pastries.component.html',
@@ -12,14 +10,17 @@ import { bindCallback } from 'rxjs';
 })
 export class PastriesComponent implements OnInit {
     titlePage: string = "Page principale : liste des pâtisseries à gagner";
-    pastries: Pastrie[] = PASTRIES;
+    pastries: Pastrie[];
     selectedPastrie?: Pastrie;
     priority:string[] = [];
     canChoice: boolean = true;
     
-    constructor() { }
+    constructor(private pastrieService: PastrieService) { 
+      // dans le construtor plutot que ngOnInit pour que l'attribut de class pastrie soit initialisé
+      this.pastries = pastrieService.getPastries()
+    }
     
-    ngOnInit() { }
+    ngOnInit() { console.log("le nombre de patisserie :",this.pastrieService.count()) }
     
 
     // Récupérer la patisserie sélectionnée au clic sur un btn

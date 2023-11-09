@@ -46,7 +46,7 @@ export const PASTRIES: Pastrie[] = [
             "yummy",
             "dessert",
             "chocolat",
-            "framboises"
+            "framboise"
         ],
     },
     {
@@ -100,8 +100,8 @@ export const PASTRIES: Pastrie[] = [
             "sucré",
             "yummy",
             "chocolat",
-            "poires",
-            "fruits"
+            "poire",
+            "fruit"
         ],
         "like": "Much",
     },
@@ -115,8 +115,8 @@ export const PASTRIES: Pastrie[] = [
         "order": 8,
         "tags": [
             "chocolat",
-            "bananes",
-            "fruits"
+            "banane",
+            "fruit"
         ],
         "like": "Much",
     },
