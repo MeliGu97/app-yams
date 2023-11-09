@@ -29,10 +29,13 @@
     <div class="row content">
         <div class="col-sm-4">
             <div class="card">
-                <app-pastrie-details [pastrie]="selectedPastrie"></app-pastrie-details>
-                
+                <app-pastrie-details [pastrie]="selectedPastrie"
+                                     [enableChoiceBt]="canChoice"
+                                     (changePreference)="changeParentPreference($event)">
+                </app-pastrie-details>
+                <p>Priorité : {{priority | json}}</p>
             </div>
-        <!-- = Ce qu'il y avait en dur avant carte à gauche avec détail de la patisserie selectionée
+            <!-- = Ce qu'il y avait en dur avant carte à gauche avec détail de la patisserie selectionée
                 <div class="card">
                 <img class="card-img-top" src="./assets/images/default_image.png" alt="Pastry Category">
                 <div class="card-body">
@@ -71,9 +74,9 @@
                     </li>
                 </ul>
             </nav><!-- .pagination -->
-            
-        
-        <!-- ul li pour lister les patisseries et leurs caractéristiques
+
+
+            <!-- ul li pour lister les patisseries et leurs caractéristiques
             => n'est plus utile mais à conserver pour bien comprendre comment ça fonctionne
 
                 <ul *ngIf="pastries" class="list-inline">
@@ -95,16 +98,19 @@
                         <p class="card-text">{{ pastrie.description }}</p>
                         <a class="btn btn-outline-dark" href="#" role="button">{{ pastrie.like }}</a>
                         <a class="btn btn-outline-dark" href="#" role="button">{{ pastrie.tags }}</a>
+                        <!-- Bouton pour voir le détail de la patisserie -->
                         <button class="btn btn-outline-primary" type="button" (click)="OnSelect(pastrie)"
                             clickable>Selectionner</button>
                         <img class="glyph-icon" src="../assets/svg/si-glyph-heart.svg" />
                         <small>{{ pastrie.order }}</small>
                         <img class="glyph-icon" src="./assets/svg/si-glyph-triangle-double-arrow-right.svg" />
                         <small>{{ pastrie.quantity }} unités disponbiles</small>
+                        <br>
+                        <!-- bouton Choice -->
                     </div>
                 </div><!-- fin card générique -->
             </ng-container>
-        <!-- Les cartes des patisseries en dur 
+            <!-- Les cartes des patisseries en dur 
             <div class="card">
                 <div class="card-header">
                     Viennoiserie
@@ -137,7 +143,7 @@
                 </div>
             </div>
         -->
-           
+
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">

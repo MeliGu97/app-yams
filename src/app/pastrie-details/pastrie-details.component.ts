@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, EventEmitter} from '@angular/core';
 import { List, Pastrie } from '../pastrie';
 import { INGREDIENTS_LISTS } from '../mock-pastries';
 
@@ -9,7 +9,9 @@ import { INGREDIENTS_LISTS } from '../mock-pastries';
 })
 export class PastrieDetailsComponent implements OnChanges {
   @Input() pastrie?: Pastrie;
+  @Input() enableChoiceBt: boolean = true;
   ingredientsLists?: string[];
+  @Output() changePreference: EventEmitter<string> = new EventEmitter();
 
   constructor() { }
 
@@ -19,5 +21,10 @@ export class PastrieDetailsComponent implements OnChanges {
         this.ingredientsLists = ingredient.list
       }
     }) 
+  }
+
+  // PastrieDetailsComponent
+  preference(id: string | undefined) {
+    if(id) this.changePreference.emit(id);// émettre l'id de la pâtisserie vers le parent
   }
 }

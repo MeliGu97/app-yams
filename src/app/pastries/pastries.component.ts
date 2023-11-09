@@ -14,15 +14,25 @@ export class PastriesComponent implements OnInit {
     titlePage: string = "Page principale : liste des pâtisseries à gagner";
     pastries: Pastrie[] = PASTRIES;
     selectedPastrie?: Pastrie;
+    priority:string[] = [];
+    canChoice: boolean = true;
     
     constructor() { }
     
     ngOnInit() { }
     
 
-    // Récupérer le nom de la patisserie sélectionnée au clic sur un btn
+    // Récupérer la patisserie sélectionnée au clic sur un btn
     OnSelect(pastrie: Pastrie) {
       console.log(pastrie);
       this.selectedPastrie = pastrie;
+    };
+
+    changeParentPreference(event:string){
+      if(this.priority.length < 3) {
+        this.priority?.push(event);
+      } else {
+        this.canChoice = false;
+      }
     }
 }
