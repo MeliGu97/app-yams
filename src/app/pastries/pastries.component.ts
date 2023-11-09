@@ -29,9 +29,8 @@ export class PastriesComponent implements OnInit {
     };
 
     changeParentPreference(event:string){
-      if(this.priority.length < 3) {
-        this.priority?.push(event);
-      } else {
+      this.priority?.push(event);
+      if(this.priority.length === 3) {
         this.canChoice = false;
       }
     }
