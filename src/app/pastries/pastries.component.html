@@ -18,20 +18,17 @@
                     </a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0 d-inline-flex">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0 m-4" type="submit">Search</button>
-            </form>
+            
             <button type="button" class="btn btn-danger">anonymous mode.</button>
         </div>
     </nav>
 
     <div class="row content">
         <div class="col-sm-4">
+            <app-search></app-search>
             <div class="card">
-                <app-pastrie-details [pastrie]="selectedPastrie"
-                                     [enableChoiceBt]="canChoice"
-                                     (changePreference)="changeParentPreference($event)">
+                <app-pastrie-details [pastrie]="selectedPastrie" [enableChoiceBt]="canChoice"
+                    (changePreference)="changeParentPreference($event)">
                 </app-pastrie-details>
                 <p>Priorité : {{priority | json}}</p>
             </div>
@@ -73,19 +70,8 @@
                         <a class="page-link" href="#">Next</a>
                     </li>
                 </ul>
+            
             </nav><!-- .pagination -->
-
-
-            <!-- ul li pour lister les patisseries et leurs caractéristiques
-            => n'est plus utile mais à conserver pour bien comprendre comment ça fonctionne
-
-                <ul *ngIf="pastries" class="list-inline">
-                <li class="list-inline-item" *ngFor="let pastrie of pastries">
-                    <span class="badge badge-info">{{ pastrie.id }}</span> {{ pastrie.name }}, {{ pastrie.like }}, {{
-                    pastrie.tags }} /
-                </li>
-            </ul> 
-        -->
 
             <!-- Carte qui fonctionne pour chaque patisserie : -->
             <ng-container *ngIf="pastries">
@@ -96,11 +82,12 @@
                     </div>
                     <div class="card-body">
                         <p class="card-text">{{ pastrie.description }}</p>
-                        <p>like :<a class="btn btn-outline-dark" href="#" role="button">{{ pastrie.like }}</a> </p>
+                        <p>like :<a class="btn btn-outline-dark" role="button">{{ pastrie.like }}</a> </p>
                         <!-- ici faire en sorte que chaque tag soit dans un bouton et qu'il soit tous à coté les uns des autres -->
                         <div class="tags-container">
-                            <p>Tag :<a *ngFor="let tag of pastrie.tags" class="badge {{ tag | pastrieTagColor }}" href="#" role="button">{{ tag }}</a></p>
-                        </div>                          
+                            <p>Tag :<a *ngFor="let tag of pastrie.tags" class="badge {{ tag | pastrieTagColor }}"
+                                    role="button">{{ tag }}</a></p>
+                        </div>
                         <!-- Bouton pour voir le détail de la patisserie -->
                         <button class="btn btn-outline-primary" type="button" (click)="OnSelect(pastrie)"
                             clickable>Selectionner</button>

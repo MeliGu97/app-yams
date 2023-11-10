@@ -27,4 +27,8 @@ export class PastrieService {
   count(){
     return this.getPastries().length;
   }
+
+  searchPastriesByName(name: string): Pastrie[] {
+    return this.pastries.filter(p => p.name.toLowerCase().includes(name.toLowerCase()));
+  }
 }

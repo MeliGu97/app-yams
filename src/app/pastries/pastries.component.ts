@@ -9,11 +9,12 @@ import { PastrieService } from '../pastrie.service'
     styleUrls: ['./pastries.component.scss']
 })
 export class PastriesComponent implements OnInit {
-    titlePage: string = "Page principale : liste des pâtisseries à gagner";
+    titlePage: string = "Liste des pâtisseries à gagner";
     pastries: Pastrie[];
     selectedPastrie?: Pastrie;
     priority:string[] = [];
     canChoice: boolean = true;
+    searchResults: any;
     
     constructor(private pastrieService: PastrieService) { 
       // dans le construtor plutot que ngOnInit pour que l'attribut de class pastrie soit initialisé

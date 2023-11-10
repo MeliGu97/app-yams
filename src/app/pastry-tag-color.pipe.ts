@@ -24,8 +24,8 @@ export class PastryTagColorPipe implements PipeTransform {
         case 'chocolat':
           cssClass = 'chocolat-badge';
           break;
-        case 'franboise':
-          cssClass = 'franboise-badge';
+        case 'framboise':
+          cssClass = 'framboise-badge';
           break;
         case 'poire':
           cssClass = 'poire-badge';
