@@ -18,14 +18,14 @@
                     </a>
                 </li>
             </ul>
-            
+
             <button type="button" class="btn btn-danger">anonymous mode.</button>
         </div>
     </nav>
 
     <div class="row content">
         <div class="col-sm-4">
-            <app-search></app-search>
+            <app-search (searchChange)="filtredPastries($event)"></app-search>
             <div class="card">
                 <app-pastrie-details [pastrie]="selectedPastrie" [enableChoiceBt]="canChoice"
                     (changePreference)="changeParentPreference($event)">
@@ -70,12 +70,12 @@
                         <a class="page-link" href="#">Next</a>
                     </li>
                 </ul>
-            
+
             </nav><!-- .pagination -->
 
             <!-- Carte qui fonctionne pour chaque patisserie : -->
             <ng-container *ngIf="pastries">
-                <h2>liste des patisseries</h2>
+                <h2>Liste des pâtisseries</h2>
                 <div class="card" *ngFor="let pastrie of pastries">
                     <div class="card-header">
                         {{ pastrie.name }}
@@ -91,12 +91,11 @@
                         <!-- Bouton pour voir le détail de la patisserie -->
                         <button class="btn btn-outline-primary" type="button" (click)="OnSelect(pastrie)"
                             clickable>Selectionner</button>
-                        <img class="glyph-icon" src="../assets/svg/si-glyph-heart.svg" />
+                        <img class="glyph-icon" src="../svg/icons8-aimer-50.png" />
                         <small>{{ pastrie.order }}</small>
-                        <img class="glyph-icon" src="./assets/svg/si-glyph-triangle-double-arrow-right.svg" />
+                        <img class="glyph-icon" src="../svg/icons8-double-droite-50.png" />
                         <small>{{ pastrie.quantity }} unités disponbiles</small>
                         <br>
-                        <!-- bouton Choice -->
                     </div>
                 </div><!-- fin card générique -->
             </ng-container>
