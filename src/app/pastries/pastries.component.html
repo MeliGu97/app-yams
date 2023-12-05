@@ -13,9 +13,14 @@
                     </a>
                 </li>
                 <li class="nav-item active">
+                        <!-- Ancien se connecter -->
                     <a class="nav-link" href="#">Se connecter
                         <span class="sr-only">(current)</span>
                     </a>
+                        <!-- le nouveau par lequel il faut remplacer l'ancien -->
+                    <!-- <a class="nav-link" routerLink="/login" routerLinkActive="active">
+                        Se connecter
+                    </a> -->
                 </li>
             </ul>
 
@@ -32,127 +37,48 @@
                 </app-pastrie-details>
                 <p>Priorité : {{priority | json}}</p>
             </div>
-            <!-- = Ce qu'il y avait en dur avant carte à gauche avec détail de la patisserie selectionée
-                <div class="card">
-                <img class="card-img-top" src="./assets/images/default_image.png" alt="Pastry Category">
-                <div class="card-body">
-                    <h5 class="card-title">Viennoiserie</h5>
-                    <p class="card-text">Brioche sucrée avec chocolat</p>
-                    <a href="#" class="btn btn-primary"> Desc >> </a>
-                </div>
-                <ul class="list-group">
-                    <li class="list-group-item active">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-            </div> 
-        -->
         </div>
 
         <div class="col-sm-8 pastrie">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
+            <!-- Pour la pagination -->
+            <app-paginate 
+                [currentPage]="currentPage"
+                [itemsPerPage]="itemsPerPage"
+                [totalItems]="totalItems"
+                (pageChanged)="onPageChange($event)"
+            ></app-paginate>
+            
+            <div *ngFor="let pastry of getDisplayedPastries()"></div>
 
-            </nav><!-- .pagination -->
-
-            <!-- Carte qui fonctionne pour chaque patisserie : -->
             <ng-container *ngIf="pastries">
                 <h2>Liste des pâtisseries</h2>
-                <div class="card" *ngFor="let pastrie of pastries">
+                <div class="card" *ngFor="let pastrie of getDisplayedPastries()">
                     <div class="card-header">
                         {{ pastrie.name }}
                     </div>
                     <div class="card-body">
+                        <img class="card-img-miniature" src={{pastrie?.url}}>
                         <p class="card-text">{{ pastrie.description }}</p>
                         <p>like :<a class="btn btn-outline-dark" role="button">{{ pastrie.like }}</a> </p>
-                        <!-- ici faire en sorte que chaque tag soit dans un bouton et qu'il soit tous à coté les uns des autres -->
                         <div class="tags-container">
-                            <p>Tag :<a *ngFor="let tag of pastrie.tags" class="badge {{ tag | pastrieTagColor }}"
-                                    role="button">{{ tag }}</a></p>
+                            <p>Tag :<a *ngFor="let tag of pastrie.tags" class="badge {{ tag | pastrieTagColor }}" role="button">{{ tag }}</a></p>
                         </div>
-                        <!-- Bouton pour voir le détail de la patisserie -->
-                        <button class="btn btn-outline-primary" type="button" (click)="OnSelect(pastrie)"
-                            clickable>Selectionner</button>
-                        <img class="glyph-icon" src="../svg/icons8-aimer-50.png" />
+                        <button class="btn btn-outline-primary" type="button" (click)="OnSelect(pastrie)" clickable>Sélectionner</button>
+                        <img class="glyph-icon" src="../svg/si-glyph-heart.svg" />
                         <small>{{ pastrie.order }}</small>
-                        <img class="glyph-icon" src="../svg/icons8-double-droite-50.png" />
-                        <small>{{ pastrie.quantity }} unités disponbiles</small>
+                        <img class="glyph-icon" src="./svg/icons8-double-droite-50.png" />
+                        <small>{{ pastrie.quantity }} unités disponibles</small>
                         <br>
                     </div>
-                </div><!-- fin card générique -->
+                </div>
+                <app-paginate 
+                    [currentPage]="currentPage"
+                    [itemsPerPage]="itemsPerPage"
+                    [totalItems]="totalItems"
+                    (pageChanged)="onPageChange($event)"
+                ></app-paginate>
+                <br><br>
             </ng-container>
-            <!-- Les cartes des patisseries en dur 
-            <div class="card">
-                <div class="card-header">
-                    Viennoiserie
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Brioche sucrée avec chocolat</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a class="btn btn-outline-primary" href="#" role="button">fr</a>
-                    <a class="btn btn-outline-dark" href="#" role="button">brioche</a>
-
-                    <img class="glyph-icon" src="./assets/svg/si-glyph-heart.svg" />
-                    <small>7</small>
-                    <img class="glyph-icon" src="./assets/svg/si-glyph-triangle-double-arrow-right.svg" />
-                    <small>8 unités disponbiles</small>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    Pâtisserie glacée
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Banana au chocolat</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a class="btn btn-outline-dark" href="#" role="button">us</a>
-
-                    <img class="glyph-icon" src="./assets/svg/si-glyph-heart.svg" />
-                    <small>3</small>
-                    <img class="glyph-icon" src="./assets/svg/si-glyph-triangle-double-arrow-right.svg" />
-                    <small>4 unités disponibles</small>
-                </div>
-            </div>
-        -->
-
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav><!-- .pagination -->
-        </div><!-- .pastrie -->
-
+        </div>
     </div>
 </div>
