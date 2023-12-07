@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ROUTES, RouterModule, Routes } from '@angular/router';
 import { PastriesComponent } from './pastries/pastries.component';
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
-export const pastriesRoutes: Routes = [
+export const routes : Routes = [
   {
       path: 'pastries',
       component: PastriesComponent
@@ -14,12 +16,16 @@ export const pastriesRoutes: Routes = [
   },
   {
       path: 'login',
-      // component: LoginComponent
+      component: LoginComponent
+  },
+  {
+      path: 'dashboard',
+      component: DashboardComponent
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(pastriesRoutes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
