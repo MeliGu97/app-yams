@@ -1,16 +1,15 @@
-<p>login works!</p>
 
-<div>
-    <label>Email:</label>
+<div class="container-fuild principal">
+     <label>Email : </label>
     <input [(ngModel)]="email" type="text" placeholder="Enter your email">
-  
-    <label>Password:</label>
+    <br><br>
+    <label>Password : </label>
     <input [(ngModel)]="password" type="password" placeholder="Enter your password">
-  
+    <br><br>
     <button (click)="onLogin()">Login</button>
   
     <div *ngIf="errorMessage" style="color: red;">
       {{ errorMessage }}
     </div>
-  </div>
+</div>
   

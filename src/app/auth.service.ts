@@ -4,20 +4,28 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  private Auth: boolean = false;
+  private isAuthenticated: boolean = false;
+
+  // Utilisez des informations d'identification réelles pour tester l'authentification
+  private expectedEmail: string = 'toto@test.fr';
+  private expectedPassword: string = 'toto';
 
   auth(email: string, password: string): boolean {
-  // auth(email: string, password: string): Promise<any> {
-    // Implémentez la logique de connexion
-		this.Auth = true;
-    return this.Auth;
+    // Vérifiez si les informations d'identification sont correctes
+    if (email === this.expectedEmail && password === this.expectedPassword) {
+      this.isAuthenticated = true;
+    } else {
+      this.isAuthenticated = false;
+    }
+
+    return this.isAuthenticated;
   }
 
   logout(): void {
-    this.Auth = false;
+    this.isAuthenticated = false;
   }
 
   isAuth(): boolean {
-    return this.Auth;
+    return this.isAuthenticated;
   }
 }

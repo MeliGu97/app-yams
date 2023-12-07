@@ -3,7 +3,6 @@
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="#">{{ title }}</a>
   </nav>
-  <div class="container-fuild principal">
     <nav class="navbar navbar-expand-lg navbar-light">
       <!-- <a class="navbar-brand" href="#">{{ titlePage }}</a> -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -18,15 +17,9 @@
                   </a>
               </li>
               <li class="nav-item active">
-                      <!-- Ancien se connecter -->
-                  <!-- <a class="nav-link" href="#">Se connecter
-                      <span class="sr-only">(current)</span>
-                  </a> -->
-                      <!-- le nouveau par lequel il faut remplacer l'ancien -->
                   <a class="nav-link" routerLink="/login" routerLinkActive="active">
                       Se connecter
                   </a>
-                  <!-- <app-login></app-login> -->
               </li>
           </ul>
 
@@ -35,6 +28,6 @@
   </nav>
 
     <!-- Ici la liste des patisseries -->
-    <app-pastries></app-pastries>
-  </div>
+    <!-- <app-pastries></app-pastries> -->
 </div>
+<router-outlet></router-outlet>

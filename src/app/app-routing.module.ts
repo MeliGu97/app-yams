@@ -3,6 +3,7 @@ import { ROUTES, RouterModule, Routes } from '@angular/router';
 import { PastriesComponent } from './pastries/pastries.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { GuardService } from './guard.service';
 
 export const routes : Routes = [
   {
@@ -19,7 +20,8 @@ export const routes : Routes = [
       component: LoginComponent
   },
   {
-      path: 'dashboard',
+      path: 'dashboard', 
+      canActivate: [GuardService],
       component: DashboardComponent
   },
 ];

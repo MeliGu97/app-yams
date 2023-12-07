@@ -13,7 +13,11 @@ import { PastryTagColorPipe } from './pastry-tag-color.pipe';
 
 import { PaginateComponent } from './paginate/paginate.component';
 import { LoginComponent } from './login/login.component';
+import { GuardService } from './guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+
+import { PopupComponent } from './popup/popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -27,14 +31,16 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     PaginateComponent,
     LoginComponent,
     DashboardComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    MatDialogModule,
     RouterModule.forRoot(routes),// chargement des routes dans l'application
   ],
-  providers: [],
+  providers: [GuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
