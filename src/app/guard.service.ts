@@ -34,7 +34,7 @@ export class GuardService implements CanActivate {
     } else {
       // Si les info sont ok, affiche ok
       // Par contre ici c'est ok ça s'affiche bien
-      this.openDialog('OK');
+      this.openDialog('Vous pouvez entrer toto. Bienvenue !');
     }
   
     // Retourne l'état d'authentification
@@ -45,7 +45,7 @@ export class GuardService implements CanActivate {
   openDialog(message: string): void {
     this.dialog.open(PopupComponent, {
       width: '250px',
-      data: { message: message }
+      data: { message: message },
     });
   }
 }

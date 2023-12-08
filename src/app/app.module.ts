@@ -15,6 +15,7 @@ import { PaginateComponent } from './paginate/paginate.component';
 import { LoginComponent } from './login/login.component';
 import { GuardService } from './guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthService } from './auth.service';
 
 import { PopupComponent } from './popup/popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -40,7 +41,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule,
     RouterModule.forRoot(routes),// chargement des routes dans l'application
   ],
-  providers: [GuardService],
+  providers: [GuardService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

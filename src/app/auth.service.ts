@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   private isAuthenticated: boolean = false;
-
   // Utilisez des informations d'identification réelles pour tester l'authentification
   private expectedEmail: string = 'toto@test.fr';
   private expectedPassword: string = 'toto';

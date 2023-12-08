@@ -1,33 +1,46 @@
-<!--  -->
-<div class="container-fuild principal">
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="#">{{ title }}</a>
-  </nav>
+<!-- app.component.html -->
+
+<div class="container-fluid principal">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <!-- <a class="navbar-brand" href="#">{{ titlePage }}</a> -->
+      <a class="navbar-brand" href="#">{{ title }}</a>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+              aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Accueil</a>
+            </li>
+            <ng-container *ngIf="authService.isAuth(); else notAuthenticated">
+              <!-- Visible que lorsque l'utili est connecté -->
               <li class="nav-item active">
-                  <a class="nav-link" href="#">Home
-                      <span class="sr-only">(current)</span>
-                  </a>
+                <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+                  Tableau de bord
+                </a>
               </li>
               <li class="nav-item active">
-                  <a class="nav-link" routerLink="/login" routerLinkActive="active">
-                      Se connecter
-                  </a>
+                <a class="nav-link" (click)="logout()" style="cursor: pointer;">
+                  Se déconnecter
+                </a>
               </li>
+            </ng-container>
+            <ng-template #notAuthenticated>
+              <!-- present quand l'utili n'est pas connecter -->
+              <li class="nav-item active">
+                <a class="nav-link" routerLink="/login" routerLinkActive="active">
+                  Se connecter
+                </a>
+              </li>
+            </ng-template>
           </ul>
-
-          <button type="button" class="btn btn-danger">anonymous mode.</button>
+  
+        <!-- <button type="button" class="btn btn-danger">anonymous mode.</button> -->
       </div>
-  </nav>
-
-    <!-- Ici la liste des patisseries -->
-    <!-- <app-pastries></app-pastries> -->
-</div>
-<router-outlet></router-outlet>
+    </nav>
+  
+    <router-outlet></router-outlet>
+  </div>
+  
