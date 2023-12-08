@@ -1,23 +1,26 @@
 <div class="container-fuild principal">
     <div class="row content">
-        <div class="col-sm-4">
-            <app-search (searchChange)="filtredPastries($event)"></app-search>
+        <div class="col-sm-4" [@openClose]="animationState">            
             <div class="card">
-                <app-pastrie-details [pastrie]="selectedPastrie" [enableChoiceBt]="canChoice"
-                    (changePreference)="changeParentPreference($event)">
-                </app-pastrie-details>
-                <p>Priorité : {{priority | json}}</p>
+              <app-pastrie-details [pastrie]="selectedPastrie" [enableChoiceBt]="canChoice"
+                (changePreference)="changeParentPreference($event)">
+              </app-pastrie-details>
+              <p>Priorité : {{priority | json}}</p>
             </div>
         </div>
 
         <div class="col-sm-8 pastrie">
-            <!-- Pour la pagination -->
-            <app-paginate 
-                [currentPage]="currentPage"
-                [itemsPerPage]="itemsPerPage"
-                [totalItems]="totalItems"
-                (pageChanged)="onPageChange($event)"
-            ></app-paginate>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <!-- Pour la pagination -->
+                <app-paginate 
+                    [currentPage]="currentPage"
+                    [itemsPerPage]="itemsPerPage"
+                    [totalItems]="totalItems"
+                    (pageChanged)="onPageChange($event)"
+                ></app-paginate>
+                <!-- Pour la recherche -->
+                <app-search (searchChange)="filtredPastries($event)"></app-search>
+            </div>
             
             <div *ngFor="let pastry of getDisplayedPastries()"></div>
 

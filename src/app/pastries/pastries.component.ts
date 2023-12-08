@@ -1,11 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Pastrie } from '../pastrie';
 import { PastrieService } from '../pastrie.service';
+import { trigger, state, style, transition, animate, keyframes  } from '@angular/animations';
 
 @Component({
   selector: 'app-pastries',
   templateUrl: './pastries.component.html',
-  styleUrls: ['./pastries.component.scss']
+  styleUrls: ['./pastries.component.scss'],
+  animations: [
+    trigger('openClose', [
+      state('open', style({ 
+        transform: 'translateX(0%)', // arrive de la droite
+        color: 'white', 
+        borderRadius: '20px',
+      })),
+      state('closed', style({ 
+        transform: 'translateX(-100%)', // Repart vers la gauche
+        height: '0px', 
+        opacity: 0, 
+      })),
+      transition('open <=> closed', [animate('0.5s')])
+    ])
+  ]
 })
 export class PastriesComponent implements OnInit {
   titlePage: string = "Liste des pâtisseries à gagner";
@@ -14,6 +30,7 @@ export class PastriesComponent implements OnInit {
   priority: string[] = [];
   canChoice: boolean = true;
   searchResults: any;
+  animationState: string = 'closed';
 
   // Pagination
   itemsPerPage = 3;
@@ -27,6 +44,7 @@ export class PastriesComponent implements OnInit {
     this.totalItems = this.pastries.length;
   }
 
+
   ngOnInit(): void {
     console.log("le nombre de patisserie :", this.pastrieService.count())
   }
@@ -35,6 +53,7 @@ export class PastriesComponent implements OnInit {
   OnSelect(pastrie: Pastrie) {
     console.log(pastrie);
     this.selectedPastrie = pastrie;
+    this.animationState = (this.animationState === 'open') ? 'closed' : 'open'; // ici pour l'animation
   }
 
   changeParentPreference(event: string) {

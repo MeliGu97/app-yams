@@ -19,7 +19,7 @@ import { AuthService } from './auth.service';
 
 import { PopupComponent } from './popup/popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -39,6 +39,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     AppRoutingModule,
     FormsModule,
     MatDialogModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(routes),// chargement des routes dans l'application
   ],
   providers: [GuardService, AuthService],
